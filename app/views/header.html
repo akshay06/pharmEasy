@@ -9,7 +9,7 @@
         <div style="float:right">
           <a style="text-decoration:none;color:rgba(0,0,0,0.8);font-family:montserrat;margin-left:15px;" ui-sref-opts="{ inherit: false }" ui-sref="home.faq">FAQ</a>
           <a style="text-decoration:none;color:rgba(0,0,0,0.8);font-family:montserrat;margin-left:15px;" ui-sref-opts="{ inherit: false }" ui-sref="home.contact-us">Contact Us</a>
-          <a style="text-decoration:none;color:rgba(0,0,0,0.8);font-family:montserrat;margin-left:15px;" ui-sref-opts="{ inherit: false }" ng-if="!isLoggedIn">Login</a>          
+          <a style="text-decoration:none;color:rgba(0,0,0,0.8);font-family:montserrat;margin-left:15px;" ui-sref-opts="{ inherit: false }" ui-sref="login" ng-if="!isLoggedIn">Login</a>          
           <a style="text-decoration:none;color:rgba(0,0,0,0.8);font-family:montserrat;margin-left:15px;" ui-sref-opts="{ inherit: false }" ng-if="isLoggedIn">Logout</a>
         </div>
       </div>
