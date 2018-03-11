@@ -1,0 +1,17 @@
+<header>
+    <div style="float:left;width:100%;padding:7px 0;background:#eee;text-align:center;" class="">
+      <div style="width:100%;max-width:1170px;color:rgba(0,0,0,0.9);font-family:montserrat;font-size:10px;display:inline-block;">
+        <div style="float:left">
+          <a>
+            Website Logo            
+          </a>
+        </div>
+        <div style="float:right">
+          <a style="text-decoration:none;color:rgba(0,0,0,0.8);font-family:montserrat;margin-left:15px;" ui-sref-opts="{ inherit: false }" ui-sref="home.faq">FAQ</a>
+          <a style="text-decoration:none;color:rgba(0,0,0,0.8);font-family:montserrat;margin-left:15px;" ui-sref-opts="{ inherit: false }" ui-sref="home.contact-us">Contact Us</a>
+          <a style="text-decoration:none;color:rgba(0,0,0,0.8);font-family:montserrat;margin-left:15px;" ui-sref-opts="{ inherit: false }" ng-if="!isLoggedIn">Login</a>          
+          <a style="text-decoration:none;color:rgba(0,0,0,0.8);font-family:montserrat;margin-left:15px;" ui-sref-opts="{ inherit: false }" ng-if="isLoggedIn">Logout</a>
+        </div>
+      </div>
+    </div>
+  </header>
