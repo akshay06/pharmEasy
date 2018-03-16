@@ -11,7 +11,6 @@ module.exports = function (grunt) {
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
-
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
@@ -440,7 +439,7 @@ module.exports = function (grunt) {
       ]
     },
   });
-
+  grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);

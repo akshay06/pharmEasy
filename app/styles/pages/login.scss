@@ -1,58 +1,46 @@
-.container-fluid{
+.container-fluid {
 	.login-container {
 		width: 40%;
 		margin: 13rem auto;
 		.login-wrapper {
 			.login-title {
-			    color: #fff;
-			    font-family: cursive;
-			    background-color: $navbar-inverse-color;
+				color: #fff;
+				font-family: cursive;
+				background-color: rgba(55, 60, 79, 1);
 			}
 			.login-body {
-				form{
+				form {
 					margin-top: 0;
-				    padding: 40px 80px 30px 80px;
-				    .icons{
-				    	color: #fff;
-					    background-color: $navbar-inverse-color;
-				    }
-				    .username-input{
-				    	margin-bottom: 25px;
-				    }
-					.password-input{
-				    	margin-bottom: 25px;
-				    }
-				    .checkbox-wrapper{
-				    	margin-bottom: 25px;
-				    	.remember-btn{
-				    		display: inline-block;
-				    		margin-right: 5px;
-				    	}
-				    	.remember-title{
-				    		display: inline-block;
-				    	}
-				    }
-				    .login-btn {
-				    	background-color: $brand-primary;
-			    	    outline: none;
-			    	    border: 0px;
+					padding: 40px 80px 30px 80px;
+					.icons {
+						color: #fff;
+						background-color: rgba(55, 60, 79, 1);
+					}
+					.username-input , .password-input {
+						margin-bottom: 25px;
+					}
+					.login-btn {
+						background-color: #373c4f;
+						outline: none;
+						border: 0px;
 						box-shadow: none;
-						&:hover{
-							background-color: darken($brand-primary, 10%);
+						&:hover {
+							background-color: darken(#373c4f, 10%);
 						}
-						&:active{
-							box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
-							background-color: darken($brand-primary, 20%);
+						&:active {
+							box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+							background-color: darken(#373c4f, 20%);
 						}
-				    }
+					}
 				}
-				
-				.input-box{
-					padding-left: 15px!important;
+				.input-box {
+					background-color: #eceff1 !important;
+					font-weight: 300;
+					padding-left: 15px !important;
 					border: 0px;
-				    box-shadow: none;
-				    &:focus{
-					    outline: none!important;
+					box-shadow: none;
+					&:focus {
+						outline: none !important;
 					}
 				}
 			}
@@ -62,23 +50,24 @@
 
 @media screen and (max-width: 1300px) {
 	.login-container {
-		width: 60%!important;
+		width: 60% !important;
 	}
 }
 
 @media screen and (max-width: 800px) {
 	.login-container {
-		width: 80%!important;
+		width: 80% !important;
 	}
 }
 
 @media screen and (max-width: 600px) {
-	.login-container {
-		width: 90%!important;
+	.container-fluid .login-container {
+		width: 90% !important;
+		margin: 5rem auto;
 	}
 	.login-body {
-		form{
-			padding: 40px 15px 30px 15px!important;
+		form {
+			padding: 40px 15px 30px 15px !important;
 		}
 	}
 }

@@ -1,8 +1,7 @@
-@import "inc/variables";
-@import "inc/mixins";
-@import "inc/common";
-
 @import "bootstrap-sass/assets/stylesheets/bootstrap";
+@import "inc/mixins";
+
+@import "inc/common";
+@import "pages/login";
 @import "pages/home";
 @import "pages/header";
-@import "pages/login";

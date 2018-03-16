@@ -8,7 +8,7 @@ angular
     'ui.router',
     'ngStorage',
     'ui.bootstrap',
-    'ngWebSocket'
+    'toastr'
   ])
 .config(['$locationProvider', function($locationProvider) {
     $locationProvider.html5Mode(true);
