@@ -3,4 +3,19 @@
   top: 0;
   left: 0;
   right: 0;
+  z-index: 1;
+  box-shadow: 0 0px 5px 0px;
+}
+
+.grid-bx {
+  background-color: #fff;
+  box-shadow: 2px 1px 9px #DCDCDC;
+  -moz-box-shadow: 2px 1px 9px #DCDCDC; 
+  position: relative;
+}
+
+.checkbox-wrapper {
+  position: absolute;
+  right: 5px;
+  padding: 5px;
 }

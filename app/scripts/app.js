@@ -2,12 +2,8 @@
 
 angular
   .module('pharmEasy', [
-    'ngCookies',
-    'ngSanitize',
-    'ngResource',
     'ui.router',
     'ngStorage',
-    'ui.bootstrap',
     'toastr'
   ])
 .config(['$locationProvider', function($locationProvider) {

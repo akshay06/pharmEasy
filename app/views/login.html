@@ -1,5 +1,5 @@
 <div class="container-fluid">
-		<div class="login-container">
+	<div class="login-container">
 		<div class="panel panel-default card grid-bx login-wrapper">
 			<div class="panel-heading text-center login-title">
 				<h1>Login</h1>
@@ -7,14 +7,39 @@
 			<div class="panel-body login-body">
 				<form>
 					<div class="username-input form-group input-group">
-						<i class="fa icons fa-user input-group-addon"></i><input type="email" class="input-lg input-box form-control" id="exampleInputEmail1" placeholder="USERNAME">
+						<i class="fa icons fa-user input-group-addon"></i><input type="text" class="input-lg input-box form-control" ng-model="user.username" id="exampleInputEmail1" placeholder="USERNAME">
 					</div>
 					<div class="password-input form-group input-group">
-						<i class="fa icons fa-lock input-group-addon"></i><input type="password" class="input-lg input-box form-control" id="exampleInputPassword1" placeholder="PASSWORD">						
+						<i class="fa icons fa-lock input-group-addon"></i><input type="password" class="input-lg input-box form-control" ng-model="user.password" id="exampleInputPassword1" placeholder="PASSWORD">						
 					</div>
-					<a type="submit" href="/" class="btn btn-info btn-lg btn-block login-btn">SIGN IN</a>
+					<button type="submit" ng-click="submit()" class="btn btn-info btn-lg btn-block login-btn">SIGN IN</button>
 				</form>
 			</div>
 		</div>
+		<div class="row text-center">Login Details</div>
+		<br><br>
+		<div class="row">
+			<div style="border-left: 1px solid;" class="col-xs-4">
+				Doctor
+				<br><br>
+				Username : doctor
+				<br>
+				Password : doctor
+			</div>
+			<div style="border-left: 1px solid;" class="col-xs-4">
+				Patient
+				<br><br>
+				Username : patient
+				<br>
+				Password : patient
+			</div>
+			<div style="border-left: 1px solid;" class="col-xs-4">
+				Pharmacist
+				<br><br>
+				Username : pharmacist
+				<br>
+				Password : pharmacist
+			</div>
 		</div>
 	</div>
+</div>

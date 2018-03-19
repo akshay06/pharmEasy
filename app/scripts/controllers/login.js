@@ -1,14 +1,17 @@
 'use strict';
 angular.module('pharmEasy')
 
-.controller('LoginController', ['$scope', 'Authentication', function ($scope, Authentication) {
+.controller('LoginController', ['$scope', 'Authentication', '$state', function ($scope, Authentication, $state) {
   $scope.user = {
     username : '',
     password : ''
   };
 
   $scope.submit = function () {
-    Authentication.login($scope.user);    
+    var userLoggedIn = Authentication.login($scope.user);
+    if (userLoggedIn) {
+      $state.go('home');
+    }
   };
   
 }]);

@@ -1,4 +1,89 @@
 <div class="headerWrapper" ng-include="'./views/header.html'"></div>
-<div style="margin-top: 35px;">
-  <div class="container">Welcome Doctor / Patient / Pharmacist</div>
+<div style="margin-top: 40px;">
+  <div class="container">Welcome {{storage.loggedInUser == 1 ? 'Doctor' : storage.loggedInUser == 2 ? 'Patient': storage.loggedInUser == 3 ? 'Pharmacist' : 'User'}}</div>
+</div>
+<div style="margin: 20px 0;">
+  <div class="container">Here are all your medical records (select the record to share, you can select multiple records) : </div>
+</div>
+<div class="container">
+  <!-- <table ng-if="storage.loggedInUser == 2" class="table text-center table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">ID</th>
+        <th class="text-center">Date</th>
+        <th class="text-center">Medicines</th>
+        <th class="text-center">Doctor</th>
+        <th class="text-center">Pharmacist</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="presc in storage.patient.prescription">
+        <td>{{presc.id}}</td>
+        <td>{{presc.date}}</td>
+        <td>
+          <li ng-repeat="med in presc.medicines">{{med}}</li>
+        </td>
+        <td>
+          <span ng-if="storage.doctor.approvedAccess.indexOf(presc.id) == -1 && storage.doctor.deniedAccess.indexOf(presc.id) == -1 && storage.doctor.pendingAccess.indexOf(presc.id) == -1"> --- </span>
+          <span ng-if="storage.doctor.approvedAccess.indexOf(presc.id) > -1">Approved</span>
+          <span ng-if="storage.doctor.deniedAccess.indexOf(presc.id) > -1">Declined</span>
+          <button class="btn btn-success" ng-click="approveRequest('doctor', presc.id)" ng-if="storage.doctor.pendingAccess.indexOf(presc.id) > -1">Approve</button>
+          <button class="btn btn-danger" ng-click="declineRequest('doctor', presc.id)" ng-if="storage.doctor.pendingAccess.indexOf(presc.id) > -1">Decline</button>          
+        </td>
+        <td>
+          <span ng-if="storage.pharmacist.approvedAccess.indexOf(presc.id) == -1 && storage.pharmacist.deniedAccess.indexOf(presc.id) == -1 && storage.pharmacist.pendingAccess.indexOf(presc.id) == -1"> --- </span>
+          <span ng-if="storage.pharmacist.approvedAccess.indexOf(presc.id) > -1">Approved</span>
+          <span ng-if="storage.pharmacist.deniedAccess.indexOf(presc.id) > -1">Declined</span>
+          <button class="btn btn-success" ng-click="approveRequest('pharmacist', presc.id)" ng-if="storage.pharmacist.pendingAccess.indexOf(presc.id) > -1">Approve</button>
+          <button class="btn btn-danger" ng-click="declineRequest('pharmacist', presc.id)" ng-if="storage.pharmacist.pendingAccess.indexOf(presc.id) > -1">Decline</button>          
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table ng-if="storage.loggedInUser == 1 || storage.loggedInUser == 3" class="table text-center table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="text-center">ID</th>
+        <th class="text-center">Date</th>
+        <th class="text-center">Medicines</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="presc in storage.patient.prescription">
+        <td>{{presc.id}}</td>
+        <td>{{presc.date}}</td>
+        <td ng-if="storage.loggedInUser == 1">
+          <span ng-if="storage.doctor.approvedAccess.indexOf(presc.id) > -1">
+            <li ng-repeat="med in presc.medicines">{{med}}</li>
+          </span>
+          <span ng-if="storage.doctor.deniedAccess.indexOf(presc.id) > -1">Patient Denied</span>
+          <span ng-if="storage.doctor.approvedAccess.indexOf(presc.id) == -1 && storage.doctor.pendingAccess.indexOf(presc.id) !== -1">Approval Pending</span>
+          <button class="btn btn-info" ng-click="getAccess(presc.id)" ng-if="storage.doctor.approvedAccess.indexOf(presc.id) == -1 && storage.doctor.pendingAccess.indexOf(presc.id) == -1 && storage.doctor.deniedAccess.indexOf(presc.id) == -1">Get Access</button>
+        </td>
+        <td ng-if="storage.loggedInUser == 3">
+          <span ng-if="storage.pharmacist.approvedAccess.indexOf(presc.id) > -1">
+            <li ng-repeat="med in presc.medicines">{{med}}</li>
+          </span>
+          <span ng-if="storage.pharmacist.deniedAccess.indexOf(presc.id) > -1">Patient Denied</span>
+          <span ng-if="storage.pharmacist.approvedAccess.indexOf(presc.id) == -1 && storage.pharmacist.pendingAccess.indexOf(presc.id) !== -1">Approval Pending</span>
+          <button class="btn btn-info" ng-click="getAccess(presc.id)" ng-if="storage.pharmacist.approvedAccess.indexOf(presc.id) == -1 && storage.pharmacist.deniedAccess.indexOf(presc.id) == -1 && storage.pharmacist.pendingAccess.indexOf(presc.id) == -1">Get Access</button>
+        </td>
+      </tr>
+    </tbody>
+  </table> -->
+  <div ng-repeat="presc in storage.patient.prescription" class="col-sm-4">
+    <div class="grid-bx panel panel-default">
+      <div class="checkbox-wapper">
+        <input ng-change="toggleRecord(presc)" style="font-size: 18px;" type="checkbox" name="approve{{$index}}">
+      </div>
+      <div class="panel-body">
+        <li ng-repeat="med in presc.medicines">{{med}}</li>
+      </div>
+      <div style="color: rgba(0,0,0,0.5);" class="panel-footer">
+        <span>By Dr.{{presc.doctor}}</span>          
+        <span class="pull-right">{{presc.date}}</span>
+      </div>
+    </div>
+  </div>
+  
 </div>
