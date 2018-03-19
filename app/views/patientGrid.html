@@ -1,0 +1,17 @@
+<div ng-repeat="presc in storage.patient.prescription" class="col-sm-4">
+    <div class="grid-bx panel panel-default">
+        <div class="checkbox-wrapper">
+            <input ng-change="toggleRecord(presc, $index)" ng-model="checkbox[$index]" style="font-size: 18px;" type="checkbox" name="record-{{$index}}">
+        </div>
+        <div style="position: relative;" class="panel-body">
+            <div ng-if="storage.loggedInUser.type !== 2" class="overlay">
+                <button style="position: absolute; top: calc(50% - 17px); left: calc(50% - 49px);" class="btn btn-info">Get Access</button>
+            </div>
+            <li ng-repeat="med in presc.medicines">{{med}}</li>
+        </div>
+        <div style="color: rgba(0,0,0,0.5);" class="panel-footer">
+            <span>By Dr.{{presc.doctor}}</span>
+            <span class="pull-right">{{presc.date}}</span>
+        </div>
+    </div>
+</div>

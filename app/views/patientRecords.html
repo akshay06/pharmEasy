@@ -1,0 +1,41 @@
+<div ng-repeat="presc in storage.patient.prescription" class="col-sm-4">
+    <div class="grid-bx panel panel-default">
+        <div class="checkbox-wrapper">
+            <input ng-change="toggleRecord(presc, $index)" ng-model="checkbox[$index]" style="font-size: 18px;" type="checkbox" name="record-{{$index}}">
+        </div>
+        <div style="position: relative;" class="panel-body">
+            <div ng-if="storage.loggedInUser.type !== 2" class="overlay">
+                <button style="position: absolute; top: calc(50% - 17px); left: calc(50% - 49px);" class="btn btn-info">Get Access</button>
+            </div>
+            <li ng-repeat="med in presc.medicines">{{med}}</li>
+        </div>
+        <div style="color: rgba(0,0,0,0.5);" class="panel-footer">
+            <span>By Dr.{{presc.doctor}}</span>
+            <span class="pull-right">{{presc.date}}</span>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12 text-center">
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Share records</button>
+</div>  
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Select Doctor / Pharmacist</h4>
+        </div>
+        <div class="modal-body">
+        <div class="doctorList" ng-repeat="doctor in storage.doctors">
+            <span>Dr.{{doctor.name}}</span>
+            <button style="margin-top: 3px;" ng-click="approveRequest('doctors', $index+1)" type="button" class="btn pull-right btn-default">Approve</button>
+        </div>
+        <div class="doctorList">
+            <span>Pharmacist</span>
+            <button style="margin-top: 3px;" ng-click="approveRequest('pharmacist')" type="button" class="btn pull-right btn-default">Approve</button>
+            </div>
+        </div>
+    </div>        
+    </div>
+</div>
