@@ -8,35 +8,35 @@ angular.module('pharmEasy')
     '$localStorage',
     'toastr',
     function ($scope, $rootScope, $state, $localStorage, toastr) {
-      if (!$localStorage.loggedInUser.type) {
-        $state.go('login');
-      }
       $scope.storage = $localStorage;
       $scope.requestArr = [];
       $scope.checkbox = [];
-
-      $scope.getAccess = function (id) {
-        if($scope.storage.loggedInUser == 1) {
-          $scope.storage.doctor.pendingAccess.push(id);
-        } else if($scope.storage.loggedInUser == 3) {
-          $scope.storage.pharmacist.pendingAccess.push(id);
-        }
-      };
+      $scope.patientId = 0;
       
       $scope.approveRequest = function (userType, doctorId) {
         if (doctorId) {
           var tempList = angular.copy($scope.storage[userType]);
           tempList[doctorId-1].approvedAccess = angular.copy($scope.requestArr);
           $scope.storage[userType] = tempList;
-          toastr.success('Records shared with Dr.'+tempList[doctorId-1].name);
+          toastr.success('Records shared with '+tempList[doctorId-1].name);
+          $scope.storage[userType][doctorId-1].pendingAccess = [];
         } else {
           $scope.storage[userType].approvedAccess = angular.copy($scope.requestArr);
+          $scope.storage[userType].pendingAccess = [];
           toastr.success('Records shared with Pharmacist');
         }
         $scope.requestArr = [];
         $scope.checkbox = [];
+        $('#myModal').modal('toggle');
       };
 
+      $scope.selectAllRecords = function () {
+        $scope.storage.patients[$scope.patientId].prescription.forEach(function (record, index) {
+          $scope.checkbox[index] = true;
+          $scope.requestArr.push(record.id);
+        });
+      };
+      
       $scope.toggleRecord = function (record, index) {
         if($scope.checkbox[index]) {
           $scope.requestArr.push(record.id)
@@ -47,13 +47,6 @@ angular.module('pharmEasy')
       
       $scope.removeFromPending = function (userType, id) {
         $scope.storage[userType].pendingAccess.splice($scope.storage[userType].pendingAccess.indexOf(id), 1);        
-      };
-
-      $scope.logout = function () {
-        $scope.requestArr = [];
-        $scope.checkbox = [];
-        $scope.storage.loggedInUser = {type:0,id:0};
-        $state.go('login');
       };
     }
   ]);

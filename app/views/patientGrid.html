@@ -1,17 +1,19 @@
-<div ng-repeat="presc in storage.patient.prescription" class="col-sm-4">
+<div ng-if="!showpatientReport" style="margin: 20px 0;">
+    <div>Here are all your patients : </div>
+</div>
+<div ng-if="!showpatientReport" ng-repeat="patient in storage.patients" class="col-sm-4">
     <div class="grid-bx panel panel-default">
-        <div class="checkbox-wrapper">
-            <input ng-change="toggleRecord(presc, $index)" ng-model="checkbox[$index]" style="font-size: 18px;" type="checkbox" name="record-{{$index}}">
-        </div>
-        <div style="position: relative;" class="panel-body">
-            <div ng-if="storage.loggedInUser.type !== 2" class="overlay">
-                <button style="position: absolute; top: calc(50% - 17px); left: calc(50% - 49px);" class="btn btn-info">Get Access</button>
+        <div style="position: relative;min-height: 150px;" class="panel-body">
+            <div class="overlay">
+                <button ng-click="showUserReport($index)" style="position: absolute; top: calc(50% - 17px); left: calc(50% - 49px);" class="btn btn-info">View Reports</button>
             </div>
-            <li ng-repeat="med in presc.medicines">{{med}}</li>
         </div>
         <div style="color: rgba(0,0,0,0.5);" class="panel-footer">
-            <span>By Dr.{{presc.doctor}}</span>
-            <span class="pull-right">{{presc.date}}</span>
+            <span>{{patient.name}}</span>
         </div>
     </div>
+</div>
+<div ng-if="showpatientReport">
+    <div class="backBtn" ng-click="hideUserReport()"><i class="fa fa-chevron-left"></i> Back to patients</div>
+    <div ng-include="'views/patientRecords.html'"></div>
 </div>

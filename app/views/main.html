@@ -1,9 +1,8 @@
 <div class="headerWrapper" ng-include="'./views/header.html'"></div>
 <div class="container" style="margin-top: 45px;font-size: 20px;">
-  Welcome to dashboard !!
-  <button class="btn btn-info pull-right" style="font-size: 12px"> + Add new record</button>
-</div>
-<div style="margin: 20px 0;">
-  <div class="container">Here are all your medical records (select the record to share, you can select multiple records) : </div>
+  Welcome to dashboard {{storage.loggedInUser.name}}!!
+  <button ng-click="toastr.info('Add feature')" ng-if="storage.loggedInUser.type !== 0 && storage.loggedInUser.type !== 3" class="btn btn-info pull-right" style="font-size: 12px"> + Add new {{state.current.name == 'home.patient'? 'record': 'patient'}}</button>
+  <span ng-show="notificationHtml" title="Notifications" data-toggle="popover" data-placement="bottom" data-html="true" data-content="{{notificationHtml}}" style="margin-right: 12px; line-height: 32px;" class="pull-right"><i style="cursor:pointer" class="fa fa-bell"></i></span>
 </div>
 <div class="container" ui-view></div>
+<div class="footerWrapper"><div class="container">Footer Here</div></div>

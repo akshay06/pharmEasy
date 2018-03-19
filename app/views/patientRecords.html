@@ -1,22 +1,29 @@
-<div ng-repeat="presc in storage.patient.prescription" class="col-sm-4">
+<div style="margin: 20px 0;">
+    <div ng-if="storage.loggedInUser.type == 2" class="container">Here are all your medical records (select the record to share, you can select multiple records) : </div>
+</div>
+<div ng-repeat="presc in storage.patients[patientId].prescription" class="col-sm-4">
     <div class="grid-bx panel panel-default">
-        <div class="checkbox-wrapper">
-            <input ng-change="toggleRecord(presc, $index)" ng-model="checkbox[$index]" style="font-size: 18px;" type="checkbox" name="record-{{$index}}">
+        <div style="color: rgba(0,0,0,0.5);" class="panel-heading">
+            <span><i class="fa fa-wpforms"></i> Record Id : {{presc.id}}</span>
+            <div ng-if="storage.loggedInUser.type == 2" class="checkbox-wrapper">
+                <input ng-change="toggleRecord(presc, $index)" ng-model="checkbox[$index]" style="font-size: 18px;cursor: pointer;" type="checkbox" name="record-{{$index}}">
+            </div>
         </div>
         <div style="position: relative;" class="panel-body">
-            <div ng-if="storage.loggedInUser.type !== 2" class="overlay">
-                <button style="position: absolute; top: calc(50% - 17px); left: calc(50% - 49px);" class="btn btn-info">Get Access</button>
+            <div ng-if="storage.loggedInUser.type !== 2 && storage.loggedInUser.approvedAccess.indexOf(presc.id) === -1" class="overlay">
+                <button ng-click="getAccess(presc.id)" style="position: absolute; top: calc(50% - 17px); left: calc(50% - 49px);" class="btn btn-info">Get Access</button>
             </div>
             <li ng-repeat="med in presc.medicines">{{med}}</li>
         </div>
         <div style="color: rgba(0,0,0,0.5);" class="panel-footer">
-            <span>By Dr.{{presc.doctor}}</span>
+            <span>By {{presc.doctor}}</span>
             <span class="pull-right">{{presc.date}}</span>
         </div>
     </div>
 </div>
-<div class="col-sm-12 text-center">
+<div ng-if="storage.loggedInUser.type == 2" class="col-sm-12 text-center">
     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Share records</button>
+    <span style="cursor: pointer;" ng-click="selectAllRecords()">(click here to select all)</span>
 </div>  
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -28,7 +35,7 @@
         </div>
         <div class="modal-body">
         <div class="doctorList" ng-repeat="doctor in storage.doctors">
-            <span>Dr.{{doctor.name}}</span>
+            <span>{{doctor.name}}</span>
             <button style="margin-top: 3px;" ng-click="approveRequest('doctors', $index+1)" type="button" class="btn pull-right btn-default">Approve</button>
         </div>
         <div class="doctorList">

@@ -7,11 +7,11 @@
 }
 
 .checkbox-wrapper {
-  position: absolute;
-  right: 5px;
+  float: right;
   padding: 5px;
   z-index: 1;
   cursor: pointer;
+  margin: -6px;
 }
 
 .doctorList {
@@ -26,4 +26,17 @@
   height: 100%;
   background: #373c4f;
   z-index: 2;
+}
+
+.backBtn {
+  i {
+    font-size: 10px;
+    vertical-align: 1px;
+  }
+  cursor: pointer;
+  border-bottom: 1px solid;
+  padding: 4px 5px 4px 0;
+  margin: 15px 0px;
+  display: inline-block;
+  font-size: 14px;
 }
