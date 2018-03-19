@@ -36,6 +36,19 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyA0qgHijYgkPozqPDUV9ZNMIcuxaiT_UYU",
+        authDomain: "pharmeasy-5ca14.firebaseapp.com",
+        databaseURL: "https://pharmeasy-5ca14.firebaseio.com",
+        projectId: "pharmeasy-5ca14",
+        storageBucket: "",
+        messagingSenderId: "159874113711"
+      };
+      firebase.initializeApp(config);
+    </script>
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/parent.js"></script>
     <script src="scripts/controllers/main.js"></script>
