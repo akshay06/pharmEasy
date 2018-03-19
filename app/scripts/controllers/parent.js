@@ -6,24 +6,25 @@ angular.module('pharmEasy').controller('ParentController', [
   '$localStorage',
   function ($scope, $rootScope, $state, $localStorage) {
     $localStorage.$default({
-      loggedInUser : 0, // 1: doctor, 2: patient, 3: pharmacist
+      loggedInUser : {
+        type : 0,
+        id : 0
+      }, // 1: doctor, 2: patient, 3: pharmacist
       doctors: [{
         id : 1,
         name : 'Akshay',
-        pendingAccess : [],
         approvedAccess : []
       }, {
         id : 2,
         name : 'Priyanka',
-        pendingAccess : [],
         approvedAccess : []
       }, {
         id : 3,
         name : 'Varun',
-        pendingAccess : [],
         approvedAccess : []
       }],
       patient : {
+        id : 1,
         prescription : [{
           id: 1,
           date: 'February 3 2018',
@@ -67,9 +68,9 @@ angular.module('pharmEasy').controller('ParentController', [
         }]
       },
       pharmacist: {
+        id : 1,
         pendingAccess : [],
-        approvedAccess : [],
-        deniedAccess : []
+        approvedAccess : []
       }
     });
   }

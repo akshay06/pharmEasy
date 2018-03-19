@@ -6,12 +6,27 @@ angular.module('pharmEasy')
     '$rootScope',
     '$state',
     '$localStorage',
-    function ($scope, $rootScope, $state, $localStorage) {
-      if (!$localStorage.loggedInUser) {
-        $state.go('login');
-      }
+    'toastr',
+    function ($scope, $rootScope, $state, $localStorage, toastr) {
 
+      switch(true) {
+        case $localStorage.loggedInUser.type == 1:
+          $state.go('home.doctor');
+          break;
+        case $localStorage.loggedInUser.type == 2:
+          $state.go('home.patient');
+          break;
+        case $localStorage.loggedInUser.type == 3:
+          $state.go('home.pharmacist');
+          break;
+        default :
+          $state.go('login');
+          break;
+      }
       $scope.storage = $localStorage;
+      $scope.requestArr = [];
+      $scope.checkbox = [];
+
       $scope.getAccess = function (id) {
         if($scope.storage.loggedInUser == 1) {
           $scope.storage.doctor.pendingAccess.push(id);
@@ -19,18 +34,27 @@ angular.module('pharmEasy')
           $scope.storage.pharmacist.pendingAccess.push(id);
         }
       };
-      $scope.approveRequest = function (userType,id) {
-        $scope.storage[userType].approvedAccess.push(id);
-        $scope.removeFromPending(userType, id);
+      
+      $scope.approveRequest = function (userType, doctorId) {
+        if (doctorId) {
+          var tempList = angular.copy($scope.storage[userType]);
+          tempList[doctorId-1].approvedAccess = angular.copy($scope.requestArr);
+          $scope.storage[userType] = tempList;
+          toastr.success('Records shared with Dr.'+tempList[doctorId-1].name);
+        } else {
+          $scope.storage[userType].approvedAccess = angular.copy($scope.requestArr);
+          toastr.success('Records shared with Pharmacist');
+        }
+        $scope.requestArr = [];
+        $scope.checkbox = [];
       };
 
-      $scope.declineRequest = function (userType,id) {
-        $scope.storage[userType].deniedAccess.push(id);
-        $scope.removeFromPending(userType, id);
-      };
-
-      $scope.toggleRecord = function (record) {
-        console.log(record);        
+      $scope.toggleRecord = function (record, index) {
+        if($scope.checkbox[index]) {
+          $scope.requestArr.push(record.id)
+        } else {
+          $scope.requestArr.splice($scope.requestArr.indexOf(record.id, 1))
+        }       
       };
       
       $scope.removeFromPending = function (userType, id) {
@@ -38,7 +62,9 @@ angular.module('pharmEasy')
       };
 
       $scope.logout = function () {
-        $scope.storage.loggedInUser = 0;
+        $scope.requestArr = [];
+        $scope.checkbox = [];
+        $scope.storage.loggedInUser = {type:0,id:0};
         $state.go('login');
       };
     }

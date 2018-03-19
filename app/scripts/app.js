@@ -19,6 +19,21 @@ angular
       templateUrl: 'views/main.html',
       controller: 'MainController'
     })
+    .state('home.patient', {
+      url: '^/patient',
+      templateUrl: 'views/patientRecords.html',
+      controller: 'PatientController'
+    })
+    .state('home.doctor', {
+      url: '^/doctor',
+      templateUrl: 'views/patientGrid.html',
+      controller: 'PatientGridController'
+    })
+    .state('home.pharmacist', {
+      url: '^/pharmacist',
+      templateUrl: 'views/patientGrid.html',
+      controller: 'PatientGridController'
+    })
     .state('login', {
       url: '^/login',
       templateUrl: 'views/login.html',
